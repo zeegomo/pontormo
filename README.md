@@ -7,9 +7,7 @@
 
 ## Usage
 * `docker build -t pontormo .`
-* `docker run pontormo -it -p <port>`
-
-Running docker container will launch server in production.
+* `docker run pontormo -it -p <port>:<port>`
 
 Ctrl-C will close the server and save registered users to `out.csv`.
 
