@@ -1,0 +1,23 @@
+[package]
+name = "pontormo"
+version = "0.1.0"
+authors = ["Giacomo Pasini <g.pasini98@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = "0.4.2"
+lazy_static = "1.4.0"
+failure = "0.1.5"
+toml = "0.5"
+serde = { version = "1.0", features = ["derive"] }
+ctrlc = { version = "3.0", features = ["termination"] }
+csv = "1.1"
+log = "0.4"
+env_logger = "0.7"
+
+[dependencies.rocket_contrib]
+version = "0.4.2"
+default-features = false
+features = ["tera_templates", "serve"]

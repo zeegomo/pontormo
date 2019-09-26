@@ -1,0 +1,7 @@
+{% extends "base" %}
+
+{% block content %}
+<div class="title">
+    Already registered
+</div>
+{% endblock content %}
