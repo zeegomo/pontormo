@@ -6,8 +6,8 @@
 * Docker
 
 ## Usage
-* `docker build .`
-* `docker run -it`
+* `docker build -t pontormo .`
+* `docker run pontormo -it -p <port>`
 
 Running docker container will launch server in production.
 
