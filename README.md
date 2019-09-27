@@ -20,3 +20,9 @@ Pontormo will show the image at `assets/logo.png` in the footer, place here your
 
 ### Other
 The `Rocket.toml` file is used to configure port, address and other server related options (see [Rocket](https://rocket.rs)).
+
+
+## QR Code
+<p align="center">
+  <img src="https://github.com/Zeegomo/pontormo/raw/master/images/qr.png"/>
+</p>
