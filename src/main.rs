@@ -14,6 +14,7 @@ extern crate env_logger;
 mod index;
 mod register;
 mod server;
+mod utils;
 
 use server::Server;
 

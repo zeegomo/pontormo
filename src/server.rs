@@ -4,6 +4,7 @@ use rocket_contrib::templates::Template;
 
 use crate::index::static_rocket_route_info_for_welcome;
 use crate::register::static_rocket_route_info_for_register;
+use crate::utils::static_rocket_route_info_for_colours_css;
 use rocket::http::Status;
 
 use failure::Fallible;
@@ -18,7 +19,7 @@ use std::sync::{Arc, Mutex};
 
 const ASSETS_PATH: &str = "/assets";
 const ASSETS_DIR: &str = "assets";
-const DEFAULT_CONFIG: &str = "Config.toml";
+pub const DEFAULT_CONFIG: &str = "Config.toml";
 const DEFAULT_OUTPUT: &str = "out.csv";
 
 pub const ALREADY_REGISTERED: Status = Status {
@@ -29,6 +30,7 @@ pub const ALREADY_REGISTERED: Status = Status {
 #[derive(Clone, Serialize, Deserialize)]
 struct Config {
     color: String,
+    text_color: String,
 }
 
 pub struct Server {
@@ -98,7 +100,7 @@ impl Server {
             .expect("Error setting Ctrl-C handler");
 
         rocket::ignite()
-            .mount("/", routes![register, welcome])
+            .mount("/", routes![register, welcome, colours_css])
             .mount(ASSETS_PATH, StaticFiles::from(ASSETS_DIR))
             .attach(Template::fairing())
             .manage(self.inner.clone())

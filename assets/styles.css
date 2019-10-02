@@ -14,7 +14,7 @@ div {
   background-color: transparent; /* Green */
   font-weight: bold;
   border: none;
-  color: whitesmoke;
+  /*color: whitesmoke;*/
   padding: 0.4rem 0.8rem;
   text-align: center;
   margin-top: 0.5rem;
@@ -25,7 +25,7 @@ div {
 .simple_text {
     font-family: monospace;
     font-size: 1.5rem;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
 }
 
 form {
@@ -33,7 +33,7 @@ form {
     display: inline-block;
     font-size: 5.5vmin;
     text-align: left;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
 }
 
 form input {
@@ -45,7 +45,7 @@ form input {
     align-self: center;
     align-items: center;
     text-align: center;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
     margin: 10vmin;
     font-size: 10vmin;
 }
@@ -54,7 +54,7 @@ footer {
     font-family: monospace;
     align-self: center;
     align-items: center;
-    color: whitesmoke;
+    /*color: whitesmoke;*/
     font-size: 2rem;
     text-align: center;
     vertical-align: middle;
