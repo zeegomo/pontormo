@@ -9,3 +9,8 @@ use std::sync::Arc;
 pub fn welcome(state: State<Arc<ServerInner>>) -> Template {
     state.render("index", Context::new())
 }
+
+#[get("/register")]
+pub fn register(state: State<Arc<ServerInner>>) -> Template {
+    state.render("register", Context::new())
+}

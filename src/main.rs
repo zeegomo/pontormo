@@ -11,6 +11,7 @@ extern crate ctrlc;
 #[macro_use]
 extern crate log;
 extern crate env_logger;
+mod config;
 mod index;
 mod register;
 mod server;

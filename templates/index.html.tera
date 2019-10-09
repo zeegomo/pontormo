@@ -1,15 +1,23 @@
 {% extends "base" %}
 
-{% block content %}
-<div class = "title" >Register</div>
-<form action="/register" method="post">
-  Name:<br>
-  <input type="text" name="name"><br>
-  Surname:<br>
-  <input type="text" name="surname">
-  <br>
-  <div>
-  <input type="submit" value="Submit" class = "button">
-  </div>
-</form>
+{% block content %} 
+<img class = "title_img" src="/assets/pontormo.png" alt="">
+{% if google_sign_in %}
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="{{ client_id }}.apps.googleusercontent.com">
+	<script src="/assets/google.js"></script>
+{% endif %}
+<ul> 
+{% if google_sign_in %}
+	<li>
+	<div class="g-signin2 inline" data-onsuccess="onSignIn"></div>
+	</li>
+{% endif %}
+	<li>
+	<div class="g-button">
+		<img class = "g-button-icon" src="/assets/small_pontormo.png" alt=""/>
+		<a class="li-button" href="/register">Register</a>
+	</div>
+	</li>
+</ul>
 {% endblock content %} 

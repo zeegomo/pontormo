@@ -5,8 +5,7 @@
     Registered
 </div>
 <div class = "simple_text">
-	{{ name }}
-	{{ surname }} 
+	{{ name }}22
 </div>
 {% endblock content %}
 

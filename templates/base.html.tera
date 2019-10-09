@@ -15,6 +15,6 @@
     </body>
     <footer>
         <hr/>
-        <img class = "footer_img" src="/assets/pontormo.png" alt=""> &times; <img class = "footer_img" src="/assets/logo.png" alt="">
+        <img class = "footer_img" src="/assets/pontormo.png" alt=""/> &times; <img class = "footer_img" src="/assets/logo.png" alt=""/>
     </footer>
 </html>

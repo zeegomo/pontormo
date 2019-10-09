@@ -2,34 +2,29 @@ use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::tera::Context;
 use rocket_contrib::templates::Template;
 
+use crate::index::static_rocket_route_info_for_register;
 use crate::index::static_rocket_route_info_for_welcome;
-use crate::register::static_rocket_route_info_for_register;
+use crate::register::static_rocket_route_info_for_process;
+use crate::register::static_rocket_route_info_for_process_google;
 use rocket::http::Status;
 
+use crate::config::Config;
 use failure::Fallible;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io;
-use std::io::Read;
 use std::net::IpAddr;
-use std::path::PathBuf;
 use std::process;
 use std::sync::{Arc, Mutex};
 
 const ASSETS_PATH: &str = "/assets";
 const ASSETS_DIR: &str = "assets";
-const DEFAULT_CONFIG: &str = "Config.toml";
 const DEFAULT_OUTPUT: &str = "out.csv";
 
 pub const ALREADY_REGISTERED: Status = Status {
     code: 491,
     reason: "Already registered",
 };
-
-#[derive(Clone, Serialize, Deserialize)]
-struct Config {
-    color: String,
-}
 
 pub struct Server {
     inner: Arc<ServerInner>,
@@ -39,6 +34,7 @@ pub struct ServerInner {
     renderer: ServerRenderer,
     ip: Mutex<HashSet<IpAddr>>,
     name: Mutex<HashSet<String>>,
+    config: Config,
 }
 
 impl ServerInner {
@@ -51,8 +47,8 @@ impl ServerInner {
         Ok(())
     }
 
-    pub fn register_name(&self, name: &str, surname: &str) -> Fallible<()> {
-        let value = format!("{} {}", name, surname);
+    pub fn register_name(&self, value: &str) -> Fallible<()> {
+        let value = value.to_string();
         let mut set = self.name.lock().unwrap();
         if set.contains(&value) {
             bail!("already registered name");
@@ -63,6 +59,14 @@ impl ServerInner {
 
     pub fn render(&self, path: &'static str, additional: Context) -> Template {
         self.renderer.render(path, additional)
+    }
+
+    pub fn check_domain(&self, mail: &str) -> Fallible<bool> {
+        if let Some(google_provider) = &self.config.google_sign_in {
+            Ok(google_provider.check_domain(mail))
+        } else {
+            bail!("google sign in unavailable")
+        }
     }
 }
 
@@ -77,17 +81,27 @@ impl ServerRenderer {
         context.extend(additional);
         Template::render(path, context)
     }
+
+    pub fn new(config: &Config) -> Self {
+        let mut context = Context::new();
+        context.insert("color", &config.appearance.color);
+        if let Some(google) = &config.google_sign_in {
+            google.init_tera(&mut context);
+            //println!("{:?}", google);
+        }
+        ServerRenderer { base: context }
+    }
 }
 
 impl Server {
     pub fn new() -> Server {
+        let config = Config::load().expect("could not load config file");
         Server {
             inner: Arc::new(ServerInner {
-                renderer: ServerRenderer {
-                    base: Server::get_context().expect("could not load config file"),
-                },
+                renderer: ServerRenderer::new(&config),
                 ip: Mutex::new(HashSet::new()),
                 name: Mutex::new(HashSet::new()),
+                config,
             }),
         }
     }
@@ -98,26 +112,11 @@ impl Server {
             .expect("Error setting Ctrl-C handler");
 
         rocket::ignite()
-            .mount("/", routes![register, welcome])
+            .mount("/", routes![register, welcome, process, process_google])
             .mount(ASSETS_PATH, StaticFiles::from(ASSETS_DIR))
             .attach(Template::fairing())
             .manage(self.inner.clone())
             .launch();
-    }
-
-    fn load_as_string(filename: PathBuf) -> Fallible<String> {
-        let mut buffer = String::new();
-        File::open(filename)?.read_to_string(&mut buffer)?;
-
-        Ok(buffer)
-    }
-
-    fn get_context() -> Fallible<Context> {
-        let buffer = Self::load_as_string(PathBuf::from(DEFAULT_CONFIG)).unwrap();
-        let config: Config = toml::from_str(&buffer)?;
-        let mut context = Context::new();
-        context.insert("color", &config.color);
-        Ok(context)
     }
 
     fn open_output_file() -> Fallible<File> {

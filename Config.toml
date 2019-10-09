@@ -1,2 +1,6 @@
+[appearance]
 color = "#ffeaa7"
 
+[google-sign-in]
+client-id = ""
+domain-filter = ""
