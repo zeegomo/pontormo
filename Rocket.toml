@@ -4,4 +4,4 @@ template_dir = "templates/"
 [production]
 template_dir = "templates/"
 address = "0.0.0.0"
-port = 80
+port = 8000

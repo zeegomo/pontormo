@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" 
+            content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/assets/styles.css">
+        <link rel="icon" type="image/png"
+ href="assets/favicon.png">
+    </head>
+    <body style = "background: {{ color }}">
+        <div class="w3-content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+    <footer>
+        <hr/>
+        <img class = "footer_img" src="/assets/pontormo.png" alt=""> &times; <img class = "footer_img" src="/assets/logo.png" alt="">
+    </footer>
+</html>

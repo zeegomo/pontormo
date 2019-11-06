@@ -1,0 +1,15 @@
+{% extends "base" %}
+
+{% block content %}
+<div class = "title" >Register</div>
+<form action="/register" method="post">
+  Name:<br>
+  <input type="text" name="name"><br>
+  Surname:<br>
+  <input type="text" name="surname">
+  <br>
+  <div>
+  <input type="submit" value="Submit" class = "button">
+  </div>
+</form>
+{% endblock content %} 

@@ -1,0 +1,86 @@
+body {
+    align-items: center;
+}
+
+div {
+    text-align: center;
+}
+
+.w3-content {
+    text-align: center;
+}
+
+.button {
+  background-color: transparent; /* Green */
+  font-weight: bold;
+  border: none;
+  color: whitesmoke;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.simple_text {
+    font-family: monospace;
+    font-size: 1.5rem;
+    color: whitesmoke;
+}
+
+form {
+    font-family: monospace;
+    display: inline-block;
+    font-size: 1.5rem;
+    text-align: left;
+    color: whitesmoke;
+}
+
+form input {
+    font-size: inherit;
+}
+
+.title {
+    font-family: monospace;
+    align-self: center;
+    align-items: center;
+    text-align: center;
+    color: whitesmoke;
+    margin: 10rem;
+    font-size: 10rem;
+}
+
+footer {
+    font-family: monospace;
+    align-self: center;
+    align-items: center;
+    color: whitesmoke;
+    font-size: 2rem;
+    text-align: center;
+    vertical-align: middle;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 1px;
+    border-top: 1px solid whitesmoke;
+    margin: 10rem 10rem 1rem 10rem;
+    padding: 0;
+}
+
+p {
+    font-family: monospace;
+    align-self: center;
+    align-items: center;
+    background-color: whitesmoke;
+    color: #667be5;
+    font-size: 2rem;
+    text-align: center;
+    font-style: italic
+}
+.footer_img {
+    align-self: center;
+    height: 2rem;
+    vertical-align: middle;
+}
