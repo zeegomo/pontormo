@@ -1,8 +1,5 @@
 git add -A
 git commit -m "minicratera"
 git push -f origin tmp
-ssh giacomo@crespino.duckdns.org -p 8086
-cd crater
-cargo test minicrater -- --ignored --test-threads 1
-exit
+ssh giacomo@crespino.duckdns.org -p 8086 'cd crater; cargo test minicrater -- --ignored --test-threads 1; exit'
 git reset HEAD~1
